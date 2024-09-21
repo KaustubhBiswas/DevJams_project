@@ -54,30 +54,30 @@ export default function Dashboard() {
 
   const [isActionEnabled, setIsActionEnabled] = useState(false);
 
-  useEffect(() => {
-    const checkUser = async () => {
-      if (!user) {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-          setUser(JSON.parse(storedUser));
-          console.log(user)
-          // Check if the user exists in the backend
-          const response = await fetch(`${devUrl}/users/checkuser/${JSON.parse(user)?.email}`, {
-            method: 'GET',
-          });
+  // useEffect(() => {
+  //   const checkUser = async () => {
+  //     if (!user) {
+  //       const storedUser = localStorage.getItem('user');
+  //       if (storedUser) {
+  //         setUser(JSON.parse(storedUser));
+  //         console.log(user)
+  //         // Check if the user exists in the backend
+  //         const response = await fetch(`${devUrl}/users/checkuser/${JSON.parse(user)?.email}`, {
+  //           method: 'GET',
+  //         });
 
-          if (!response.ok) {
-            // Redirect if the user is not valid
-            router.replace("/signin");
-          }
-        } else {
-          // Redirect if no user is found
-          router.replace("/signin");
-        }
-      }
-    };
-    checkUser();
-  }, [user, setUser, router, devUrl]);
+  //         if (!response.ok) {
+  //           // Redirect if the user is not valid
+  //           router.replace("/signin");
+  //         }
+  //       } else {
+  //         // Redirect if no user is found
+  //         router.replace("/signin");
+  //       }
+  //     }
+  //   };
+  //   checkUser();
+  // }, [user, setUser, router, devUrl]);
   
   if (!user) {
     return <p>Loading...</p>;
@@ -176,7 +176,7 @@ export default function Dashboard() {
             <h2 className="text-5xl font-bold mb-2">Hello, {user.name}</h2>
             <h2 className="text-3xl font-bold mb-4 text-gray-400">Let&apos;s roll</h2>
             <p className="text-sm text-gray-400 mb-6">Waste Less, Live More: Together, We Can Make a Difference!</p>
-            <div className="bg-indigo-950 p-8 rounded-3xl">
+            <div className="bg-emerald-950 p-8 rounded-3xl">
               <Button
                   className={`w-full font-bold py-7 text-lg rounded-full mb-5 transition-colors ${
                     isActionEnabled
@@ -185,10 +185,10 @@ export default function Dashboard() {
                   }`}
                   onClick={() => setIsActionEnabled(!isActionEnabled)}
                 >
-                  {isActionEnabled ? 'Cancel Pickup' : 'Schedule Pickup'}
+                  {isActionEnabled ? 'Cancel Pickup' : 'Call for Pickup'}
                 </Button>
-                <Button variant="outline" className="w-full bg-white text-black hover:bg-gray-200 font-bold py-7 text-lg rounded-full">
-                Browse Gallery
+                <Button variant="outline" className="w-full bg-white text-black hover:bg-yellow-400 font-bold py-7 text-lg rounded-full hover:text-black">
+                Schedule a Truck
               </Button>
             </div>
           </CardContent>
@@ -202,7 +202,7 @@ export default function Dashboard() {
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-lg font-semibold text-black p-4">Upcoming Event</h3>
-                  <p className="text-sm text-gray-700 font-semibold px-4">PICT 1</p>
+                  <p className="text-sm text-gray-700 font-semibold px-4">Clean VIT (24/05/24)</p>
                 </div>
                 <img src="https://static.vecteezy.com/system/resources/previews/024/467/586/original/cartoon-tree-isolated-on-a-white-background-simple-modern-style-cute-green-plants-forest-flat-illustration-summer-spring-trees-vector.jpg" alt="Event" className="w-16 h-16 rounded-full" />
               </div>
