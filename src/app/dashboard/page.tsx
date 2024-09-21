@@ -10,16 +10,6 @@ import { useUser } from "@/contexts/usercontext";
 import { Bell, Calendar, ChevronDown, LogOut, Mail, Menu, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
-const data = [
-  { name: 'Jan', value: 400 },
-  { name: 'Feb', value: 300 },
-  { name: 'Mar', value: 600 },
-  { name: 'Apr', value: 800 },
-  { name: 'May', value: 500 },
-  { name: 'Jun', value: 700 },
-]
 
 export default function Dashboard() {
   const devUrl = process.env.NEXT_PUBLIC_DEV_URL;
@@ -124,9 +114,9 @@ export default function Dashboard() {
         {/* Cards Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { title: 'Revenue', value: '$8,942.32', change: '+2.5%' },
-            { title: 'Users', value: '56,271', change: '+3.2%' },
-            { title: 'Conversion Rate', value: '8.5%', change: '+1.8%' }
+            { title: 'Points', value: '722', change: '+2.5%' },
+            { title: 'Users', value: '250', change: '+3.2%' },
+            { title: 'Success Rate', value: '80.5%', change: '+1.8%' }
           ].map((metric, index) => (
             <Card key={index} className="bg-black border-border-white/10 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader>
@@ -150,7 +140,7 @@ export default function Dashboard() {
             <div className="flex-grow">
               <div className="aspect-video w-full">
                 <iframe
-                src="https://mapsplatform.google.com/maps-products/routes/"
+                src="https://google-maps-component.vercel.app/"
                 width="100%"
                 height="100%"
                 style={{border: 0}}

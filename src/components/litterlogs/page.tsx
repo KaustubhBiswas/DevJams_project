@@ -75,7 +75,7 @@ export default function LitterLogsTable() {
   return (
     <Card className="w-full max-w-4xl mx-auto bg-black text-white">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center text-green-400">Litter Logs</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center text-blue-500">Litter Logs</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -102,21 +102,21 @@ export default function LitterLogsTable() {
                   <TableRow key={log._id} className="hover:bg-gray-800">
                     <TableCell>
                       <div className="flex items-center">
-                        <MapPinIcon className="w-4 h-4 mr-2 text-green-400" />
+                        <MapPinIcon className="w-4 h-4 mr-2 text-orange-500" />
                         {formatCoordinates(log.location.coordinates)}
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center">
-                        <ImageIcon className="w-4 h-4 mr-2 text-green-400" />
-                        <a href={log.imageUrl} target="_blank" rel="noopener noreferrer" className="text-green-400 hover:underline">
+                        <ImageIcon className="w-4 h-4 mr-2 text-orange-500" />
+                        <a href={log.imageUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-red-500 underline">
                           View Image
                         </a>
                       </div>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center">
-                        <CalendarIcon className="w-4 h-4 mr-2 text-green-400" />
+                        <CalendarIcon className="w-4 h-4 mr-2 text-orange-500" />
                         {formatDate(log.timestamp)}
                       </div>
                     </TableCell>
