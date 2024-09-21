@@ -143,21 +143,21 @@ export default function LitterLogsTable() {
   )
 
   return (
-    <Card className="w-full max-w-4xl mx-auto bg-black text-white">
+    <Card className="col-span-2 w-3/5  bg-black border-white/10 text-white">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center text-green-400">Litter Logs</CardTitle>
+        <CardTitle className="text-2xl font-bold text-left text-white">LITTER LOGS</CardTitle>
       </CardHeader>
       <CardContent>
         <Table className="table-auto w-full">
           <TableHeader>
             <TableRow>
-              <TableHead className="text-green-400 text-left w-1/3">Location</TableHead>
-              <TableHead className="text-green-400 text-left w-1/3">Image</TableHead>
-              <TableHead className="text-green-400 text-left w-1/3">Timestamp</TableHead>
+              <TableHead className="text-green-400 text-left w-1/4">Location</TableHead>
+              <TableHead className="text-green-400 text-left w-1/6">Image</TableHead>
+              <TableHead className="text-green-400 text-left w-1/4">Timestamp</TableHead>
             </TableRow>
           </TableHeader>
         </Table>
-        <ScrollArea className="h-[150px] overflow-auto">
+        <ScrollArea className="h-[190px] overflow-auto">
           <Table className="table-auto w-full">
             <TableBody>
               {isLoading ? (
@@ -166,17 +166,19 @@ export default function LitterLogsTable() {
                   <SkeletonRow />
                   <SkeletonRow />
                   <SkeletonRow />
+                  <SkeletonRow />
+                  <SkeletonRow />
                 </>
               ) : (
                 images.map((image, index) => (
                   <TableRow key={index} className="hover:bg-gray-800">
-                    <TableCell className="w-1/3">
+                    <TableCell className="w-1/4">
                       <div className="flex items-center">
                         <MapPinIcon className="w-4 h-4 mr-2 text-orange-500" />
                         {image.location.address || "Unknown location"}
                       </div>
                     </TableCell>
-                    <TableCell className="w-1/3">
+                    <TableCell className="w-1/6">
                       <div className="flex items-center">
                         <ImageIcon className="w-4 h-4 mr-2 text-orange-500" />
                         <a href={image.url} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-orange-500 hover:underline">
@@ -184,7 +186,7 @@ export default function LitterLogsTable() {
                         </a>
                       </div>
                     </TableCell>
-                    <TableCell className="w-1/3">
+                    <TableCell className="w-1/4">
                       <div className="flex items-center">
                         <CalendarIcon className="w-4 h-4 mr-2 text-orange-500" />
                         {image.timestamp ? formatDate(image.timestamp) : "Unknown timestamp"}

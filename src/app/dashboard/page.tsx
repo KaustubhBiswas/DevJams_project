@@ -10,6 +10,40 @@ import { useUser } from "@/contexts/usercontext";
 import { Bell, Calendar, ChevronDown, LogOut, Mail, Menu, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
+
+
+
+const DonutChart = ({ value, color, size = 80 }) => {
+  const data = [
+    { value: value, color: color },
+    { value: 100 - value, color: '#111112FF' },
+  ]
+
+  return (
+    <ResponsiveContainer width={size} height={size}>
+      <PieChart>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          innerRadius={size / 3}
+          outerRadius={size / 2}
+          fill="#FFFFFFFF"
+          dataKey="value"
+          startAngle={90}
+          endAngle={-270}
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={entry.color} />
+          ))}
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
+  )
+}
+
+
 
 export default function Dashboard() {
   const devUrl = process.env.NEXT_PUBLIC_DEV_URL;
@@ -110,11 +144,11 @@ export default function Dashboard() {
       </nav>
 
       {/* Main Content */}
-      <main className="p-6 space-y-6">
+      <main className="p-6 grid grid-cols-3 gap-6">
         {/* Cards Row */}
         
         {/*Map section*/}
-        <Card className="bg-black border border-white/10 shadow-lg p-6">
+        <Card className=" col-span-2 bg-black border border-white/10 shadow-lg overflow-hidden">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-xl font-semibold text-[#00ff9d]">Location Overview</CardTitle>
         </CardHeader>
@@ -124,22 +158,27 @@ export default function Dashboard() {
               <div className="aspect-video w-full">
                 <iframe
                 src="https://google-maps-component.vercel.app/"
-                width="80%"
-                height="80%"
+                width="100%"
+                height="100%"
                 style={{border: 0}}
                 allowFullScreen
                 loading="lazy"
                 ></iframe>
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center gap-4">
-              <div className="p-4 bg-black-100 text-white rounded-md bold-md">
-                <h2 className="md:text-lg font-bold">Hello {user.name}</h2>
-                <p>Welcome to our app</p>
-              </div>
-              <div>
+            </div>
+            </CardContent>
+            </Card>
+
+            
+            <Card className="bg-black border border-white/10 shadow-lg flex flex-col justify-center align-middle">
+          <CardContent className="p-6">
+            <h2 className="text-5xl font-bold mb-2">Hello, {user.name}</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gray-400">Let&apos;s roll</h2>
+            <p className="text-sm text-gray-400 mb-6">Waste Less, Live More: Together, We Can Make a Difference!</p>
+            <div className="bg-indigo-950 p-8 rounded-3xl">
               <Button
-                  className={`w-full px-4 py-2 rounded-md transition-colors ${
+                  className={`w-full font-bold py-7 text-lg rounded-full mb-5 transition-colors ${
                     isActionEnabled
                       ? 'bg-red-600 hover:bg-red-700 text-white'
                       : 'bg-green-600 hover:bg-green-700 text-white'
@@ -148,16 +187,48 @@ export default function Dashboard() {
                 >
                   {isActionEnabled ? 'Cancel Pickup' : 'Schedule Pickup'}
                 </Button>
-              </div>
+                <Button variant="outline" className="w-full bg-white text-black hover:bg-gray-200 font-bold py-7 text-lg rounded-full">
+                Browse Gallery
+              </Button>
             </div>
-          </div>
-        </CardContent>
+          </CardContent>
         </Card>
-
+        </main>
+        <main className="p-6 flex gap-y-0 gap-x-6">
         {/*Log Table*/}
         <LitterLogsTable />
-
-        
+        <Card className="bg-yellow-400 border-none shadow-lg flex flex-col">
+            <CardContent className="p-6 h-5/6">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-black p-4">Upcoming Event</h3>
+                  <p className="text-sm text-gray-700 font-semibold px-4">PICT 1</p>
+                </div>
+                <img src="https://static.vecteezy.com/system/resources/previews/024/467/586/original/cartoon-tree-isolated-on-a-white-background-simple-modern-style-cute-green-plants-forest-flat-illustration-summer-spring-trees-vector.jpg" alt="Event" className="w-16 h-16 rounded-full" />
+              </div>
+              </CardContent>
+              <CardContent className="justify-end">
+              <Button variant="outline" className="w-full border-black text-white hover:bg-black hover:text-yellow-400 ">
+                Join Event
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="bg-black border border-white/10 shadow-lg w-2/12">
+            <CardContent className="p-4">
+              <div className="flex flex-col justify-center align-middle">
+                <div className="flex-1 flex flex-col items-center pb-4">
+                  <DonutChart value={66} color="#22c55e" label="66%" />
+                  <span className="text-sm font-medium mt-2">Visitors</span>
+                  <p className="text-xl font-bold">1,125</p>
+                </div>
+                <div className="flex-1 flex flex-col items-center">
+                  <DonutChart value={33} color="#22c55e" label="33%" />
+                  <span className="text-sm font-medium mt-2">Views</span>
+                  <p className="text-xl font-bold">200</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         <DarkThemeAiChatbot />
       </main>
     </div>

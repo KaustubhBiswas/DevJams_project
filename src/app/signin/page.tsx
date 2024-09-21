@@ -97,7 +97,7 @@ export default function SignIn() {
             <h1 className="text-5xl font-bold text-[#00ff9d]">EcoIndia</h1>
           </div>
           <p className="text-xl mb-8 max-w-md mx-auto text-gray-300">
-            Empowering India&apos;s Green Revolution. Join us in creating a sustainable future.
+            Empowering India&apos;s Sustainability. Join us in creating a sustainable future.
           </p>
         </div>
         <Button className='bg-black'>
