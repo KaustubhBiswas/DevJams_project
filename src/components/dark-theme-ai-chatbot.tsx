@@ -8,7 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MessageCircle, X, Send, Bot, User } from 'lucide-react'
 import { useUser } from '@/contexts/usercontext'
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY1;
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Initial prompt to be sent with each user message
