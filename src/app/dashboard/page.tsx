@@ -22,28 +22,28 @@ export default function Dashboard() {
 
   useEffect(() => {
     const checkUser = async () => {
-      //check if user data is stored in local storage
-      const storedUser = localStorage.getItem('user');
+      if (!user) {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+          console.log(user)
+          // Check if the user exists in the backend
+          const response = await fetch(`${devUrl}/users/checkuser/${JSON.parse(user)?.email}`, {
+            method: 'GET',
+          });
 
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-
-        const response = await fetch(`${devUrl}/users/checkuser/${user?.email}`, {
-          method: 'GET',
-        });
-        if (response.ok) {
-          console.log("user exists!");
-          router.replace("/dashboard");
+          if (!response.ok) {
+            // Redirect if the user is not valid
+            router.replace("/signin");
+          }
         } else {
+          // Redirect if no user is found
           router.replace("/signin");
         }
-      } else {
-        //if no user is present in local storage, then redirect to sign in page
-        router.replace('/signin');
       }
     };
     checkUser();
-  }, [setUser, router]);
+  }, [user, setUser, router, devUrl]);
   
   if (!user) {
     return <p>Loading...</p>;
@@ -112,24 +112,7 @@ export default function Dashboard() {
       {/* Main Content */}
       <main className="p-6 space-y-6">
         {/* Cards Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { title: 'Points', value: '722', change: '+2.5%' },
-            { title: 'Users', value: '250', change: '+3.2%' },
-            { title: 'Success Rate', value: '80.5%', change: '+1.8%' }
-          ].map((metric, index) => (
-            <Card key={index} className="bg-black border-border-white/10 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader>
-                <CardTitle className="text-lg font-medium text-[#00ff9d]">{metric.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold text-white">{metric.value}</p>
-                <p className="text-sm text-green-400">{metric.change} from last month</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
+        
         {/*Map section*/}
         <Card className="bg-black border border-white/10 shadow-lg p-6">
         <CardHeader className="flex flex-row items-center justify-between">
@@ -174,15 +157,7 @@ export default function Dashboard() {
         {/*Log Table*/}
         <LitterLogsTable />
 
-        {/* Action Buttons */}
-        <div className="flex justify-end space-x-4">
-          <Button variant="outline" className="border-[#007aff] text-[#007aff] hover:bg-[#007aff] hover:text-white">
-            Generate Report
-          </Button>
-          <Button variant="outline" className="border-[#007aff] text-[#007aff] hover:bg-[#007aff] hover:text-white">
-            Export Data
-          </Button>
-        </div>
+        
         <DarkThemeAiChatbot />
       </main>
     </div>
