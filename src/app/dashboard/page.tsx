@@ -124,8 +124,8 @@ export default function Dashboard() {
               <div className="aspect-video w-full">
                 <iframe
                 src="https://google-maps-component.vercel.app/"
-                width="100%"
-                height="100%"
+                width="80%"
+                height="80%"
                 style={{border: 0}}
                 allowFullScreen
                 loading="lazy"
@@ -134,7 +134,7 @@ export default function Dashboard() {
             </div>
             <div className="flex flex-col justify-center items-center gap-4">
               <div className="p-4 bg-black-100 text-white rounded-md bold-md">
-                <h2 className="md:text-lg font-bold">Hello</h2>
+                <h2 className="md:text-lg font-bold">Hello {user.name}</h2>
                 <p>Welcome to our app</p>
               </div>
               <div>

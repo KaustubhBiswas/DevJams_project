@@ -172,21 +172,21 @@ export default function LitterLogsTable() {
                   <TableRow key={index} className="hover:bg-gray-800">
                     <TableCell className="w-1/3">
                       <div className="flex items-center">
-                        <MapPinIcon className="w-4 h-4 mr-2 text-green-400" />
+                        <MapPinIcon className="w-4 h-4 mr-2 text-orange-500" />
                         {image.location.address || "Unknown location"}
                       </div>
                     </TableCell>
                     <TableCell className="w-1/3">
                       <div className="flex items-center">
-                        <ImageIcon className="w-4 h-4 mr-2 text-green-400" />
-                        <a href={image.url} target="_blank" rel="noopener noreferrer" className="text-green-400 hover:underline">
+                        <ImageIcon className="w-4 h-4 mr-2 text-orange-500" />
+                        <a href={image.url} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:text-orange-500 hover:underline">
                           View Image
                         </a>
                       </div>
                     </TableCell>
                     <TableCell className="w-1/3">
                       <div className="flex items-center">
-                        <CalendarIcon className="w-4 h-4 mr-2 text-green-400" />
+                        <CalendarIcon className="w-4 h-4 mr-2 text-orange-500" />
                         {image.timestamp ? formatDate(image.timestamp) : "Unknown timestamp"}
                       </div>
                     </TableCell>
