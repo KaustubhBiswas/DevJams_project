@@ -16,7 +16,7 @@ export default function OnboardingPage() {
     latitude: '',
     longitude: '',
     events: [] as string[],
-    usertype: 'User'
+    usertype: '',
   })
 
   const [isMounted, setIsMounted] = useState(false);
@@ -25,7 +25,7 @@ export default function OnboardingPage() {
     setIsMounted(true);
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
@@ -53,8 +53,14 @@ export default function OnboardingPage() {
       })
 
       if (response.ok) {
+        console.log(jsonData)
         console.log('User onboarded successfully')
-        router.replace('/dashboard')
+        if (jsonData.usertype === 'Trucker'){
+          router.replace('/dashboard/trucker')
+        }
+        else if (jsonData.usertype == 'Admin'){
+          router.replace('/dashboard')
+        }
       } else {
         const errorData = await response.json();
         console.error('Failed to onboard user:', errorData)
@@ -134,6 +140,22 @@ export default function OnboardingPage() {
                 onChange={handleInputChange}
               />
             </div>
+            <div>
+            <Label htmlFor="type" className="text-gray-300">User Type</Label>
+            <select
+              id="usertype"
+              name="usertype"
+              required
+              className="w-full bg-gray-800 text-white border-gray-700 focus:border-green-400 focus:ring-1 focus:ring-green-400 focus:outline-none"
+              value={formData.usertype}
+              onChange={handleInputChange}
+            >
+              {/* <option value="">Select Type</option> */}
+              <option value="Admin">Admin</option>
+              <option value="Client">Client</option>
+              <option value="Trucker">Trucker</option>
+            </select>
+          </div>
           </div>
           <Button
             type="submit"
