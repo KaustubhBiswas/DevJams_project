@@ -73,8 +73,19 @@ export default function SignIn() {
         method: 'GET',
       });
       if (res.ok) {
-        console.log("User exists!");
-        router.replace("/dashboard");
+        const data = await res.json();
+        if (data.user.usertype === "Trucker"){
+          console.log("User is a Tucker");
+          router.replace("/dashboard/trucker");
+        }
+        else if (data.user.usertype === "Admin"){
+          console.log("User is an Admin");
+          router.replace("/dashboard");
+        }
+        else {
+          console.log("User exists but type not matched");
+          router.replace("/dashboard");
+        }
       } else {
         router.replace("/onboarding");
       }
