@@ -117,7 +117,7 @@ export default function OnboardingPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="latitude" className="text-gray-300">Latitude</Label>
+              <Label htmlFor="latitude" className="text-gray-300">Longitude</Label>
               <Input
                 id="latitude"
                 name="latitude"
@@ -129,7 +129,7 @@ export default function OnboardingPage() {
               />
             </div>
             <div>
-              <Label htmlFor="longitude" className="text-gray-300">Longitude</Label>
+              <Label htmlFor="longitude" className="text-gray-300">Latitude</Label>
               <Input
                 id="longitude"
                 name="longitude"
