@@ -92,6 +92,29 @@ export default function Dashboard() {
     router.replace('/signin');
   }
 
+
+  const handleClick = async () => {
+    // Replace with your actual user ID
+    setIsActionEnabled((prev) => !prev);
+      console.log(user.email);
+    try {
+      const response = await fetch(`https://ecoindia-backend.onrender.com/truck/startjourney`, {
+        method: 'POST',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      console.log(data);
+      
+    } catch (error) {
+      console.error('Error making the request:', error);
+    }
+  };
+
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
@@ -183,7 +206,7 @@ export default function Dashboard() {
                       ? 'bg-red-600 hover:bg-red-700 text-white'
                       : 'bg-green-600 hover:bg-green-700 text-white'
                   }`}
-                  onClick={() => setIsActionEnabled(!isActionEnabled)}
+                  onClick={handleClick}
                 >
                   {isActionEnabled ? 'Cancel Pickup' : 'Confirm Pickup'}
                 </Button>
